@@ -1,0 +1,19 @@
+﻿<Window x:Class="Application.TipsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Application"
+        mc:Ignorable="d"
+        Title="TipsWindow" Height="767" Width="1053">
+    <Grid>
+        <TextBox x:Name="AddTipBox" HorizontalAlignment="Left" Margin="10,56,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="888" Height="74"/>
+        <DataGrid  ColumnWidth="*" AutoGenerateColumns="True" x:Name="TipsDataGrid"  Margin="10,176,10,166" SelectedCellsChanged="TipsDataGrid_SelectedCellsChanged"/>
+        <DataGrid ColumnWidth="*" AutoGenerateColumns="True" x:Name="TipsDataGridFriends" Margin="10,629,10,10" />
+        <Button Name="AddTip" Content="Add tip" HorizontalAlignment="Left" Margin="916,41,0,0" VerticalAlignment="Top" Click="AddTip_Click" Height="46" Width="117" FontSize="18"/>
+        <Button IsEnabled="False" Name="AddLike" Content="Like" HorizontalAlignment="Left" Margin="916,102,0,0" VerticalAlignment="Top" Height="46" Width="117" FontSize="18" Click="AddLikeClick"/>
+        <Label Content="What Your Frends are Saying About This Busines" HorizontalAlignment="Left" Margin="10,590,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
+        <Label HorizontalAlignment="Left" Margin="10,137,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Content="This Business's Tips"/>
+        <Label HorizontalAlignment="Left" Margin="10,17,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Content="Leave a Tip!"/>
+    </Grid>
+</Window>

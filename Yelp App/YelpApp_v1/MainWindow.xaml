@@ -1,0 +1,217 @@
+﻿<Window x:Class="Application.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        mc:Ignorable="d"
+        Title="Yelp App" Height="825" Width="1000">
+    <TabControl>
+        <TabItem Header="User Information">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="181*"/>
+                    <ColumnDefinition Width="814*"/>
+                </Grid.ColumnDefinitions>
+                <GroupBox Header="Set Current User" HorizontalAlignment="Left" Width="137" Height="264" VerticalAlignment="Top">
+                    <StackPanel Height="239">
+                        <TextBox  Text="" Width="120" Name="SearchUserBox" TextChanged="SearchUserBox_TextChanged"/>
+                        <Separator Height="6"/>
+                        <ListBox Height="210" Name="UserSelectionBox" SelectionChanged="UserSelectionBox_OnSelectionChanged">
+                        </ListBox>
+                    </StackPanel>
+
+                </GroupBox>
+                <GroupBox Header="User Information" Margin="137,0,0,0" HorizontalAlignment="Left" Width="240" Height="264" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                    <Grid Height="244">
+                        <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="49"/>
+                        <TextBox HorizontalAlignment="Left" Margin="49,5,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="169" IsEnabled="False" Name="nameTextbox"/>
+                        <Label Content="Stars:" HorizontalAlignment="Left" Margin="0,27,0,0" VerticalAlignment="Top"/>
+                        <TextBox HorizontalAlignment="Left" Margin="38,32,0,0" TextWrapping="Wrap" Text="3.55" VerticalAlignment="Top" Width="53" IsEnabled="False" Name="StarsTextBox"/>
+                        <Label Content="Fans:" HorizontalAlignment="Center" Margin="0,27,0,0" VerticalAlignment="Top"/>
+                        <TextBox HorizontalAlignment="Left" Margin="139,32,0,0" TextWrapping="Wrap" Text="11" VerticalAlignment="Top" Width="79" IsEnabled="False" TextAlignment="Center" Name="FansCountTextBox"/>
+                        <Label Content="Yelping Since:" HorizontalAlignment="Left" Margin="0,53,0,0" VerticalAlignment="Top" Width="89"/>
+                        <TextBox HorizontalAlignment="Left" Margin="84,59,0,0" TextWrapping="Wrap" Text="11/12/22" VerticalAlignment="Top" Width="134" IsEnabled="False" TextAlignment="Center" Name="yelpingTextBox"/>
+                        <TextBox HorizontalAlignment="Left" Margin="69,98,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="31" IsEnabled="False" TextAlignment="Center" Name="funnyTextbox"/>
+                        <TextBox HorizontalAlignment="Left" Margin="127,98,0,0" TextWrapping="Wrap" Text="222" VerticalAlignment="Top" Width="31" IsEnabled="False" TextAlignment="Center" Name="coolTextbox"/>
+                        <TextBox HorizontalAlignment="Left" Margin="181,98,0,0" TextWrapping="Wrap" Text="33" VerticalAlignment="Top" Width="31" IsEnabled="False" TextAlignment="Center" Name="usefulTextbox"/>
+                        <Label Content="Votes:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="43" Margin="0,77,0,0"/>
+                        <Label Content="Funny" HorizontalAlignment="Left" VerticalAlignment="Top" Width="43" Margin="64,77,0,0"/>
+                        <Label Content="Cool" HorizontalAlignment="Left" VerticalAlignment="Top" Width="37" Margin="124,77,0,0"/>
+                        <Label Content="Useful" HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Margin="176,77,0,0"/>
+                        <Label Content="Tip Count:" HorizontalAlignment="Left" Margin="0,121,0,0" VerticalAlignment="Top" Width="64"/>
+                        <Label Content="Total Tip Likes:" HorizontalAlignment="Left" Margin="0,146,0,0" VerticalAlignment="Top" Width="83"/>
+                        <Label Content="Location:" HorizontalAlignment="Left" Margin="0,170,0,0" VerticalAlignment="Top" Width="64"/>
+                        <TextBox HorizontalAlignment="Left" Margin="64,127,0,0" TextWrapping="Wrap" Text="11/12/22" VerticalAlignment="Top" Width="154" IsEnabled="False" TextAlignment="Center" Name="tipTotalTextbox"/>
+                        <TextBox HorizontalAlignment="Left" Margin="88,152,0,0" TextWrapping="Wrap" Text="11/12/22" VerticalAlignment="Top" Width="130" IsEnabled="False" TextAlignment="Center" Name="totalLikesTextbox"/>
+                        <TextBox HorizontalAlignment="Left" Margin="38,194,0,0" TextWrapping="Wrap" Text="33.504923423" VerticalAlignment="Top" Width="131" IsEnabled="False" TextAlignment="Center" Name="latTextbox"/>
+                        <TextBox HorizontalAlignment="Left" Margin="38,217,0,0" TextWrapping="Wrap" Text="-112.2039933" VerticalAlignment="Top" Width="131" IsEnabled="False" TextAlignment="Center" Name="lonTextbox"/>
+                        <Label Content="Lat:" HorizontalAlignment="Left" Margin="0,190,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Long:" HorizontalAlignment="Left" Margin="0,213,0,0" VerticalAlignment="Top"/>
+                        <Button Name="UserEditLonLat" Content="Edit" HorizontalAlignment="Left" Margin="174,192,0,0" VerticalAlignment="Top" Width="44" Click="UserEditLonLat_Click"/>
+                        <Button IsEnabled="False" Name="UserUpdateLonLat" Content="Update" HorizontalAlignment="Left" Margin="174,216,0,0" VerticalAlignment="Top" Width="44" Click="UserUpdateLonLat_Click"/>
+                    </Grid>
+
+                </GroupBox>
+                <GroupBox Header="Friends" Margin="0,264,0,0" HorizontalAlignment="Left" Width="377" Grid.ColumnSpan="2">
+                    <DataGrid ColumnWidth="*" AutoGenerateColumns="True" Name="FriendsDataGrid">
+                    </DataGrid>
+
+                </GroupBox>
+                <GroupBox Header="Latest tips from Friends" Margin="196,0,0,0" Grid.Column="1">
+                    <DataGrid AutoGenerateColumns="True" ColumnWidth="*" Name="LatestTipsFriendsTable">
+                    </DataGrid>
+
+                </GroupBox>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Business Search" Name="BuisnessSearchTab" IsEnabled="False">
+            <Grid>
+                <Grid>
+                    <GroupBox Header="Select Location" HorizontalAlignment="Left" Width="197" Margin="0,0,0,1">
+                        <StackPanel>
+                            <GroupBox Height="55" Header="State">
+                                <Grid Height="42">
+                                    <ComboBox HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" Width="153" Height="20" Name="StateSelectComboBox" SelectionChanged="StateSelectComboBox_OnSelectionChanged"/>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Height="127" Header="City">
+                                <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Name="CityLookupBox" SelectionChanged="CityLookupBox_OnSelectionChanged"/>
+                            </GroupBox>
+                            <GroupBox Height="130" Header="Zipcode">
+                                <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Name="ZipcodeLookupBox" SelectionChanged="ZipcodeLookupBox_OnSelectionChanged"/>
+                            </GroupBox>
+                            <GroupBox Height="423" Header="Business Category">
+                                <Grid Height="400">
+                                    <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Height="283" VerticalAlignment="Top" Name="BusinessCategoryBox"/>
+                                    <Button Content="Add" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top" Width="76" Name="AddCategoryButton" Click="AddCategoryButton_OnClick"/>
+                                    <Button Content="Remove" HorizontalAlignment="Left" Margin="91,288,0,0" VerticalAlignment="Top" Width="72" Name="RemoveCategoryButton" Click="RemoveCategoryButton_OnClick"/>
+                                    <Button Content="Search" HorizontalAlignment="Center" Margin="0,377,0,0" VerticalAlignment="Top" Width="153" Name="SearchButton" Click="SearchButton_OnClick"/>
+                                    <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,312,0,27" Name="SelectedCategoriesListBox"/>
+                                </Grid>
+                            </GroupBox>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="SEARCH RESULTS" Margin="197,0,0,0" Height="464" VerticalAlignment="Top" HorizontalAlignment="Left" Width="485">
+                        <DataGrid  ColumnWidth="Auto" AutoGenerateColumns="True" Name="SearchResultsTable" SelectionChanged="SearchResultsTable_SelectionChanged" AreRowDetailsFrozen="True" RowHeight="30">
+
+                        </DataGrid>
+                    </GroupBox>
+                    <GroupBox Header="Selected Business" Margin="197,464,0,1">
+                        <Grid Height="269">
+                            <TreeView Name="treeview" Background="Gray" HorizontalAlignment="Left" Width="260" Margin="526,0,0,0">
+
+                            </TreeView>
+                            <Button IsEnabled="False" Content="Show Checkins" HorizontalAlignment="Left" Margin="392,10,0,0" VerticalAlignment="Top" Height="48" Width="107" Name="ShowCheckinsButton" Click="ShowCheckinsButton_OnClick"/>
+                            <Button IsEnabled="False" Content="Show Tips" HorizontalAlignment="Left" Margin="392,63,0,0" VerticalAlignment="Top" Height="48" Width="108" Name="ShowTipsButton" Click="ShowTipsButton_OnClick"/>
+                            <Rectangle HorizontalAlignment="Left" Height="48" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="377"/>
+                            <Rectangle HorizontalAlignment="Left" Height="48" Margin="10,63,0,0" Stroke="Black" VerticalAlignment="Top" Width="377"/>
+                            <Rectangle HorizontalAlignment="Left" Height="114" Margin="10,116,0,0" Stroke="Black" VerticalAlignment="Top" Width="489"/>
+                            <Label Content="BUSINESS NAME:" HorizontalAlignment="Left" Margin="21,21,0,0" VerticalAlignment="Top" Width="113" Name="BusinessNameLabel"/>
+                            <Label Content="Address:" HorizontalAlignment="Left" Margin="21,74,0,0" VerticalAlignment="Top" Width="57" Name="BusinessAddressLabel"/>
+                            <Label Content="OPEN HOURS:" HorizontalAlignment="Left" Margin="21,160,0,0" VerticalAlignment="Top" Width="89" Name="BusinessOpenHours"/>
+                            <TextBox IsEnabled="False" x:Name="BusinessNameBox" HorizontalAlignment="Left" Margin="139,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230"/>
+                            <TextBox IsEnabled="False" x:Name="BusinessAddressBox" HorizontalAlignment="Left" Margin="139,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230"/>
+                            <TextBox IsEnabled="False" x:Name="BusinessOpenHoursBox" HorizontalAlignment="Left" Margin="139,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="247" Height="82"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="FILTERS" Height="464" VerticalAlignment="Top" Margin="682,0,0,0">
+                        <StackPanel Height="445">
+                            <GroupBox Height="100" Header="Filter by Price">
+                                <Grid>
+                                    <CheckBox IsChecked="False" Content="$" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" Name="Price1CB"  Checked="PriceCB_Changed" Unchecked="PriceCB_Changed"/>
+                                    <CheckBox IsChecked="False" Content="$$$" HorizontalAlignment="Left" Margin="173,10,0,0" VerticalAlignment="Top" Name="Price3CB" Checked="PriceCB_Changed" Unchecked="PriceCB_Changed"/>
+                                    <CheckBox IsChecked="False" Content="$$" HorizontalAlignment="Left" Margin="37,52,0,0" VerticalAlignment="Top" Name="Price2CB" Checked="PriceCB_Changed" Unchecked="PriceCB_Changed"/>
+                                    <CheckBox IsChecked="False" Content="$$$$" HorizontalAlignment="Left" Margin="173,52,0,0" VerticalAlignment="Top" Name="Price4CB" Checked="PriceCB_Changed" Unchecked="PriceCB_Changed"/>
+                                </Grid>
+                            </GroupBox>
+                            <StackPanel Height="287" Orientation="Horizontal">
+                                <GroupBox Header="Filter by Attributes" Width="184" Height="284">
+                                    <ListBox VerticalAlignment="Stretch">
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Accepts Credit Cards" Name="AcceptsCreditCardsBox" Checked="FilterByAttributes_Checked"  Unchecked="FilterByAttributes_Checked" />
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Takes Reservations" Name="TakesReservationsBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"/>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Wheelchair Accessible" Name="WheelchairAccessibleBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"/>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Outdoor Seating" Name="OutdoorSeatingBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"/>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Good for Kids" Name="GoodforKidsBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"/>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Good for Groups" Name="GoodforGroupsBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"/>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Delivery" Name="DeliveryBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"/>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Take Out" Name="TakeOutBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"/>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Free Wi-Fi" Name="FreeWiFiBox" Checked="FilterByAttributes_Checked"  Unchecked="FilterByAttributes_Checked"/>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Bike Parking" Name="BikeParkingBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"/>
+                                    </ListBox>
+                                </GroupBox>
+                                <GroupBox Header="Filter by Meal" Width="115" Height="284">
+                                    <ListBox>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Breakfast" Name="BreakfastBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"></CheckBox>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Lunch" Name="LunchBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"></CheckBox>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Brunch" Name="BrunchBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"></CheckBox>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Dinner" Name="DinnerBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"></CheckBox>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Dessert" Name="DessertBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"></CheckBox>
+                                        <CheckBox IsEnabled="False" IsChecked="False" Content="Late Night" Name="LateNightBox" Checked="FilterByAttributes_Checked" Unchecked="FilterByAttributes_Checked"></CheckBox>
+                                    </ListBox>
+                                </GroupBox>
+                            </StackPanel>
+                            <GroupBox Height="55" Header="Sort Results By">
+                                <Grid>
+                                    <ComboBox HorizontalAlignment="Center" VerticalAlignment="Center" Width="212" Name="SortFiltersDropBox">
+
+                                    </ComboBox>
+                                </Grid>
+                            </GroupBox>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Business Owner Info">
+            <Grid>
+                <GroupBox Header="Buisness Login" HorizontalAlignment="Left" Width="137" Height="264" VerticalAlignment="Top">
+                    <StackPanel Height="233">
+                        <TextBox Name="BusinessSearchBox" TextWrapping="Wrap" Text="" Width="120" TextChanged="BusinessSearchBox_TextChanged"/>
+                        <Separator Height="6"/>
+                        <ListBox Name="BusinessIDListBox" Height="203" SelectionChanged="BusinessIDListBox_SelectionChanged"/>
+                    </StackPanel>
+
+                </GroupBox>
+                <GroupBox Header="Business Information" Margin="137,0,0,0" HorizontalAlignment="Left" Width="240" Height="264" VerticalAlignment="Top">
+                    <Grid Height="244">
+                        <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="49" Margin="0,5,0,0"/>
+                        <TextBox Name="BusinessNameTextBox" HorizontalAlignment="Left" Margin="49,5,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="169" IsEnabled="False" Height="27"/>
+                        <Label Content="Stars:" HorizontalAlignment="Left" Margin="2,40,0,0" VerticalAlignment="Top"/>
+                        <TextBox Name="BusinessStarsTextBox" HorizontalAlignment="Left" Margin="45,45,0,0" TextWrapping="Wrap" Text="3.55" VerticalAlignment="Top" Width="53" IsEnabled="False"/>
+                        <Label Content="Address:" HorizontalAlignment="Left" Margin="0,58,0,0" VerticalAlignment="Top" Width="64"/>
+                        <Label Content="Total Tips:" HorizontalAlignment="Left" Margin="0,116,0,0" VerticalAlignment="Top" Width="64"/>
+                        <Label Content="Location:" HorizontalAlignment="Left" Margin="0,170,0,0" VerticalAlignment="Top" Width="64"/>
+                        <TextBox Name="BusinessAddressTextBox" HorizontalAlignment="Center" Margin="0,83,0,0" TextWrapping="Wrap" Text="123 abc street but way longer so that I can see what it looks like" VerticalAlignment="Top" Width="208" IsEnabled="False" TextAlignment="Center" Height="28" FontSize="10"/>
+                        <TextBox Name="BusinessTotalTipsTextBox" HorizontalAlignment="Left" Margin="93,122,0,0" TextWrapping="Wrap" Text="11/12/22" VerticalAlignment="Top" Width="125" IsEnabled="False" TextAlignment="Center"/>
+                        <TextBox Name="BusinessLatTextBox" HorizontalAlignment="Left" Margin="38,194,0,0" TextWrapping="Wrap" Text="33.504923423" VerticalAlignment="Top" Width="180" IsEnabled="False" TextAlignment="Center"/>
+                        <TextBox Name="BusinessLonTextBox" HorizontalAlignment="Left" Margin="38,217,0,0" TextWrapping="Wrap" Text="-112.2039933" VerticalAlignment="Top" Width="180" IsEnabled="False" TextAlignment="Center"/>
+                        <Label Content="Lat:" HorizontalAlignment="Left" Margin="0,190,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Long:" HorizontalAlignment="Left" Margin="0,213,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Total Checkins:" HorizontalAlignment="Left" Margin="0,144,0,0" VerticalAlignment="Top" Width="88"/>
+                        <TextBox Name="BusinessTotalCheckinsTextBox" HorizontalAlignment="Left" Margin="93,150,0,0" TextWrapping="Wrap" Text="11/12/22" VerticalAlignment="Top" Width="125" IsEnabled="False" TextAlignment="Center"/>
+                    </Grid>
+
+                </GroupBox>
+                <GroupBox Header="Recent Checkedin Visitors" Margin="0,264,0,0" HorizontalAlignment="Left" Width="377">
+                    <DataGrid Name="RecentCheckinsDataGrid" AutoGenerateColumns="True" ColumnWidth="*">
+                    </DataGrid>
+
+                </GroupBox>
+                <GroupBox Header="Latest tips for your business" Margin="377,0,0,0">
+                    <DataGrid Name="LatestTipsForBusinessDataGrid" AutoGenerateColumns="True" ColumnWidth="*">
+                        
+                    </DataGrid>
+
+                </GroupBox>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Map">
+            <DockPanel>
+                <m:Map  CredentialsProvider="AsPq5so3u6EudT-hxuH3z4z_AINMI1OCWgWwLuPgSXMt3t7X0Xfu_pzSS72n6BJM" Center="47.608013,-122.335167" ZoomLevel="12" Name="bingMap" />
+            </DockPanel>
+        </TabItem>
+    </TabControl>
+
+</Window>
